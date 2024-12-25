@@ -78,8 +78,20 @@ docker-compose up --build
 3. Acceder a la aplicación que estará disponible en http://localhost:9898.
 
 
-
-
 ## En ejecución
 
 ![API con Swagger](/images/swagger.png)
+
+## Publicación
+
+### GitHub
+
+```bash
+git clone -b master https://github.com/angelluce/api-punto-venta.git
+```
+
+### Docker Hub
+
+```bash
+docker pull angellucerodev/punto-venta-app
+```
