@@ -95,3 +95,5 @@ git clone -b master https://github.com/angelluce/api-punto-venta.git
 ```bash
 docker pull angellucerodev/punto-venta-app
 ```
+
+![Contenedor en Docker Hub](/images/dockerhub.png)
