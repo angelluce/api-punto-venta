@@ -75,7 +75,8 @@ mvn clean package
 docker-compose up --build
 ```
 
-3. Acceder a la aplicación que estará disponible en http://localhost:9898.
+3. Acceder a la aplicación que estará disponible en http://localhost:9898 y
+la documentación en http://localhost:9898/swagger-ui/index.html#/
 
 
 ## En ejecución
