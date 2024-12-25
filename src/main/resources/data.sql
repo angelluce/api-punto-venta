@@ -1,0 +1,1 @@
+INSERT INTO rol (nombre, estado) VALUES ('admin', true), ('user', true);
