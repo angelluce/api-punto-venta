@@ -2,29 +2,40 @@ version: '3.8'
 services:
   postgres:
     image: postgres:14
+    networks:
+      - punto-venta
     container_name: postgres_container
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: angel
-      POSTGRES_DB: punto-venta
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=desarrollo
+      - POSTGRES_DB=punto-venta
     ports:
-      - "5433:5432"
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    command: postgres -c 'max_connections=200' -c 'log_statement=all'
+    restart: always
 
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: angellucerodev/api-spring-punto-venta:0.0.2
+    networks:
+      - punto-venta
     container_name: punto-venta-app
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/punto-venta
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: angel
-    ports:
-      - "9898:8080"
     depends_on:
       - postgres
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/punto-venta
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=desarrollo
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_SHOW_SQL=false
+      - SPRING_DATASOURCE.CACHEPREPSTMTS=false
+    ports:
+      - "9898:8080"
+    restart: always
+
+networks:
+  punto-venta:
 
 volumes:
   postgres_data:
